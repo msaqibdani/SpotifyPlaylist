@@ -1,7 +1,7 @@
 import os
 import sys
 import spotipy
-from spotipy import util
+import spotipy.util as util
 import json
 import webbrowser
 from json.decoder import JSONDecodeError
