@@ -15,12 +15,20 @@ redirect_uri = 'http://google.com/'
 #User ID: 222lflk6h5pichsj4goxz64zi
 
 
-scope = 'user-library-read'
+scope = 'playlist-modify-public'
 try:
-    token = util.prompt_for_user_token(username, None, client_id, client_secret, redirect_uri)
+    token = util.prompt_for_user_token(username, scope, client_id, client_secret, redirect_uri)
 except (AttributeError, JSONDecodeError):
     os.remove(f".cache-{username}")
-    token = util.prompt_for_user_token(username, None, client_id, client_secret, redirect_uri)
+    token = util.prompt_for_user_token(username, scope, client_id, client_secret, redirect_uri)
 
 #Create Spotipy Object
 spotifyObject = spotipy.Spotify(auth=token)
+
+spotifyObject.trace = True # turn on tracing
+spotifyObject.trace_out = True # turn on trace out
+
+temp = spotifyObject.current_user()['id']
+spotifyObject.user_playlist_create(temp, 'Daily') 
+
+#print(json.dumps(temp,sort_keys=True, indent=4))
