@@ -6,3 +6,6 @@ Environment:
 
 Install python3
 Installed spotipy --- [python3 -m install spotipy] 
+
+
+(NOTE: It's not completed yet)
